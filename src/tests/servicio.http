@@ -1,0 +1,80 @@
+### Listar todos los servicios
+GET http://localhost:3005/api/servicios
+
+
+### Buscar servicio por ID
+GET http://localhost:3005/api/servicios/1
+
+### Crear Ambientes deportivos
+POST http://localhost:3005/api/servicios
+Content-Type: application/json
+
+{
+  "nombre": "Ambientes deportivos",
+  "descripcion": "Reserva espacios deportivos disponibles dentro de la universidad.",
+  "imagen": "ambientes_deportivos.jpg",
+  "estado": true
+}
+
+
+### Crear Reserva de ambientes técnicos (SERCOM)
+POST http://localhost:3005/api/servicios
+Content-Type: application/json
+
+{
+  "nombre": "Reserva de ambientes técnicos (SERCOM)",
+  "descripcion": "Reserva ambientes técnicos para actividades académicas o prácticas.",
+  "imagen": "espacios_tecnicos.webp",
+  "estado": true
+}
+
+
+### Crear Reserva de Laboratorios
+POST http://localhost:3005/api/servicios
+Content-Type: application/json
+
+{
+  "nombre": "Reserva de Laboratorios",
+  "descripcion": "Solicita laboratorios especializados según tu necesidad académica.",
+  "imagen": "reserva_lab.jpg",
+  "estado": true
+}
+
+
+### Crear Préstamo de equipos (SERCOM)
+POST http://localhost:3005/api/servicios
+Content-Type: application/json
+
+{
+  "nombre": "Préstamo de equipos (SERCOM)",
+  "descripcion": "Solicita equipos disponibles para uso académico o audiovisual.",
+  "imagen": "reserva_equipos.jpg",
+  "estado": true
+}
+
+
+### Crear Reserva de cubículos
+POST http://localhost:3005/api/servicios
+Content-Type: application/json
+
+{
+  "nombre": "Reserva de cubículos",
+  "descripcion": "Reserva espacios individuales o grupales para estudio.",
+  "imagen": "reserva_cubiculos.webp",
+  "estado": true
+}
+
+### Actualizar servicio
+PUT http://localhost:3005/api/servicios/1
+Content-Type: application/json
+
+{
+  "nombre": "Ambientes deportivos",
+  "descripcion": "Reserva espacios deportivos disponibles dentro de la universidad.",
+  "imagen": "ambientes_deportivos.jpg",
+  "estado": true
+}
+
+
+### Eliminar servicio
+DELETE http://localhost:3005/api/servicios/2
