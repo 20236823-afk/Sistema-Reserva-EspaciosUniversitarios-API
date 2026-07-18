@@ -9,7 +9,7 @@ import reservaRoutes from './src/routes/reserva.routes.js';
 import noticiaRoutes from './src/routes/noticia.routes.js';
 import horarioRoutes from './src/routes/horario.routes.js';
 import participanteRoutes from './src/routes/participante.routes.js';
-import dashboardRoutes from './src/routes/dashboard.routes.js';
+
 
 const app = express();
 
@@ -30,6 +30,6 @@ app.use('/api/reservas', reservaRoutes);
 app.use('/api/noticias', noticiaRoutes);
 app.use('/api/horarios', horarioRoutes);
 app.use('/api/participantes', participanteRoutes);
-app.use('/api/dashboard', dashboardRoutes);
+
 
 export default app;

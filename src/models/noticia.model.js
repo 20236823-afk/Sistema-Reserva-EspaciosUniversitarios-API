@@ -14,9 +14,18 @@ const Noticia = sequelize.define(
             allowNull: false
         },
         categoria: {
-            type: DataTypes.ENUM('Noticia', 'Comunicado', 'Evento'),
+            type: DataTypes.ENUM(
+                'Noticia',
+                'Comunicado',
+                'Evento',
+                'Deportes'
+            ),
             allowNull: false,
             defaultValue: 'Noticia'
+        },
+        fecha: {
+            type: DataTypes.DATEONLY,
+            allowNull: false
         },
         descripcion: {
             type: DataTypes.TEXT,

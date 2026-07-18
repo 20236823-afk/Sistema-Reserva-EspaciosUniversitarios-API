@@ -1,80 +1,394 @@
-### Listar todos los servicios
-GET http://localhost:3005/api/servicios
+@baseUrl = http://localhost:3005/api
 
 
-### Buscar servicio por ID
-GET http://localhost:3005/api/servicios/1
+############################
+# USUARIOS
+############################
 
-### Crear Ambientes deportivos
-POST http://localhost:3005/api/servicios
+### Obtener usuarios
+GET {{baseUrl}}/usuarios
+
+
+### Obtener usuario por ID
+GET {{baseUrl}}/usuarios/2
+
+
+### Login administrador
+POST {{baseUrl}}/usuarios/login
 Content-Type: application/json
 
 {
-  "nombre": "Ambientes deportivos",
-  "descripcion": "Reserva espacios deportivos disponibles dentro de la universidad.",
-  "imagen": "ambientes_deportivos.jpg",
-  "estado": true
+    "correo": "admin@ulima.edu.pe",
+    "password": "admin123"
 }
 
 
-### Crear Reserva de ambientes técnicos (SERCOM)
-POST http://localhost:3005/api/servicios
+### Login estudiante
+POST {{baseUrl}}/usuarios/login
 Content-Type: application/json
 
 {
-  "nombre": "Reserva de ambientes técnicos (SERCOM)",
-  "descripcion": "Reserva ambientes técnicos para actividades académicas o prácticas.",
-  "imagen": "espacios_tecnicos.webp",
-  "estado": true
+    "correo": "alumno@ulima.edu.pe",
+    "password": "alumno123"
 }
 
 
-### Crear Reserva de Laboratorios
-POST http://localhost:3005/api/servicios
+### Login incorrecto
+POST {{baseUrl}}/usuarios/login
 Content-Type: application/json
 
 {
-  "nombre": "Reserva de Laboratorios",
-  "descripcion": "Solicita laboratorios especializados según tu necesidad académica.",
-  "imagen": "reserva_lab.jpg",
-  "estado": true
+    "correo": "alumno@ulima.edu.pe",
+    "password": "incorrecta"
 }
 
 
-### Crear Préstamo de equipos (SERCOM)
-POST http://localhost:3005/api/servicios
+### Crear usuario de prueba
+POST {{baseUrl}}/usuarios
 Content-Type: application/json
 
 {
-  "nombre": "Préstamo de equipos (SERCOM)",
-  "descripcion": "Solicita equipos disponibles para uso académico o audiovisual.",
-  "imagen": "reserva_equipos.jpg",
-  "estado": true
+    "nombre": "Estudiante de prueba",
+    "correo": "prueba@ulima.edu.pe",
+    "password": "1234",
+    "codigo": "20269999",
+    "rol": "estudiante"
 }
 
 
-### Crear Reserva de cubículos
-POST http://localhost:3005/api/servicios
+############################
+# SERVICIOS
+############################
+
+### Obtener todos los servicios
+GET {{baseUrl}}/servicios
+
+
+### Obtener servicio por ID
+GET {{baseUrl}}/servicios/1
+
+
+### Crear servicio de prueba
+POST {{baseUrl}}/servicios
 Content-Type: application/json
 
 {
-  "nombre": "Reserva de cubículos",
-  "descripcion": "Reserva espacios individuales o grupales para estudio.",
-  "imagen": "reserva_cubiculos.webp",
-  "estado": true
+    "nombre": "Servicio temporal",
+    "descripcion": "Servicio utilizado para probar la API.",
+    "imagen": "servicio_temporal.jpg",
+    "estado": true
 }
 
-### Actualizar servicio
-PUT http://localhost:3005/api/servicios/1
+
+### Actualizar descripción del servicio 1
+PUT {{baseUrl}}/servicios/1
 Content-Type: application/json
 
 {
-  "nombre": "Ambientes deportivos",
-  "descripcion": "Reserva espacios deportivos disponibles dentro de la universidad.",
-  "imagen": "ambientes_deportivos.jpg",
-  "estado": true
+    "descripcion": "Reserva de canchas, piscina y demás espacios deportivos.",
+    "estado": true
 }
 
 
-### Eliminar servicio
-DELETE http://localhost:3005/api/servicios/2
+### Desactivar servicio 4
+PUT {{baseUrl}}/servicios/4
+Content-Type: application/json
+
+{
+    "estado": false
+}
+
+
+### Eliminar servicio de prueba
+# Reemplaza ID_NUEVO por el ID devuelto al crear el servicio
+DELETE {{baseUrl}}/servicios/ID_NUEVO
+
+
+############################
+# LOCALES
+############################
+
+### Obtener todos los locales
+GET {{baseUrl}}/locales
+
+
+### Obtener local por ID
+GET {{baseUrl}}/locales/1
+
+
+### Crear local de prueba
+POST {{baseUrl}}/locales
+Content-Type: application/json
+
+{
+    "nombre": "Pabellón de prueba",
+    "direccion": "Campus Universidad de Lima"
+}
+
+
+### Actualizar local
+PUT {{baseUrl}}/locales/1
+Content-Type: application/json
+
+{
+    "nombre": "Centro Deportivo Mayorazgo",
+    "direccion": "Campus Mayorazgo"
+}
+
+
+### Eliminar local de prueba
+# Reemplaza ID_NUEVO por el ID devuelto en el POST
+DELETE {{baseUrl}}/locales/2
+
+
+############################
+# RECURSOS
+############################
+
+### Obtener todos los recursos
+GET {{baseUrl}}/recursos
+
+
+### Obtener recurso por ID
+GET {{baseUrl}}/recursos/1
+
+
+### Crear recurso de prueba
+POST {{baseUrl}}/recursos
+Content-Type: application/json
+
+{
+    "nombre": "Cancha de vóley",
+    "capacidad": 12,
+    "estado": "Disponible",
+    "servicioId": 1,
+    "localId": 1
+}
+
+
+### Actualizar recurso
+PUT {{baseUrl}}/recursos/1
+Content-Type: application/json
+
+{
+    "nombre": "Basket cancha completa",
+    "capacidad": 10,
+    "estado": "Disponible",
+    "servicioId": 1,
+    "localId": 1
+}
+
+
+### Eliminar recurso de prueba
+# Reemplaza ID_NUEVO por el ID devuelto en el POST
+DELETE {{baseUrl}}/recursos/ID_NUEVO
+
+
+############################
+# HORARIOS
+############################
+
+### Obtener todos los horarios
+GET {{baseUrl}}/horarios
+
+
+### Obtener horario por ID
+GET {{baseUrl}}/horarios/1
+
+
+### Crear horario
+POST {{baseUrl}}/horarios
+Content-Type: application/json
+
+{
+    "fecha": "2026-07-25",
+    "horaInicio": "09:00:00",
+    "horaFin": "09:50:00",
+    "estado": "Disponible",
+    "servicioId": 1,
+    "localId": 1
+}
+
+
+### Marcar horario 1 como ocupado
+PUT {{baseUrl}}/horarios/1
+Content-Type: application/json
+
+{
+    "estado": "Ocupado"
+}
+
+
+### Liberar horario 1
+PUT {{baseUrl}}/horarios/1
+Content-Type: application/json
+
+{
+    "estado": "Disponible"
+}
+
+
+### Bloquear horario 1
+PUT {{baseUrl}}/horarios/1
+Content-Type: application/json
+
+{
+    "estado": "Bloqueado"
+}
+
+
+### Eliminar horario de prueba
+# Reemplaza ID_NUEVO por el ID devuelto en el POST
+DELETE {{baseUrl}}/horarios/ID_NUEVO
+
+
+############################
+# RESERVAS
+############################
+
+### Obtener todas las reservas
+GET {{baseUrl}}/reservas
+
+
+### Obtener reserva por ID
+GET {{baseUrl}}/reservas/1
+
+
+### Crear reserva
+POST {{baseUrl}}/reservas
+Content-Type: application/json
+
+{
+    "usuarioId": 2,
+    "servicioId": 1,
+    "localId": 1,
+    "recursoId": 2,
+    "fecha": "2026-07-25",
+    "horaInicio": "09:00:00",
+    "duracion": 50,
+    "estado": "Pendiente"
+}
+
+
+### Aprobar reserva 1
+PUT {{baseUrl}}/reservas/1
+Content-Type: application/json
+
+{
+    "estado": "Confirmado"
+}
+
+
+### Cancelar reserva 1
+PUT {{baseUrl}}/reservas/1
+Content-Type: application/json
+
+{
+    "estado": "Cancelado"
+}
+
+
+### Eliminar reserva de prueba
+# Reemplaza ID_NUEVO por el ID devuelto en el POST
+DELETE {{baseUrl}}/reservas/ID_NUEVO
+
+
+############################
+# PARTICIPANTES
+############################
+
+### Obtener todos los participantes
+GET {{baseUrl}}/participantes
+
+
+### Obtener participante por ID
+GET {{baseUrl}}/participantes/1
+
+
+### Crear participante
+# La reserva con ID 4 debe existir
+POST {{baseUrl}}/participantes
+Content-Type: application/json
+
+{
+    "codigo": "20261234",
+    "nombre": "Participante de prueba",
+    "reservaId": 4
+}
+
+
+### Actualizar participante
+PUT {{baseUrl}}/participantes/1
+Content-Type: application/json
+
+{
+    "codigo": "20236823",
+    "nombre": "Antonio Sifuentes Linares",
+    "reservaId": 4
+}
+
+
+### Eliminar participante de prueba
+# Reemplaza ID_NUEVO por el ID devuelto en el POST
+DELETE {{baseUrl}}/participantes/ID_NUEVO
+
+
+############################
+# NOTICIAS
+############################
+
+### Obtener todas las noticias
+GET {{baseUrl}}/noticias
+
+
+### Obtener noticia por ID
+GET {{baseUrl}}/noticias/1
+
+
+### Crear noticia
+POST {{baseUrl}}/noticias
+Content-Type: application/json
+
+{
+    "titulo": "Noticia de prueba",
+    "categoria": "Noticia",
+    "fecha": "2026-07-25",
+    "descripcion": "Publicación utilizada para probar la creación de noticias.",
+    "estado": "Borrador"
+}
+
+
+### Publicar noticia 4
+PUT {{baseUrl}}/noticias/4
+Content-Type: application/json
+
+{
+    "estado": "Publicada"
+}
+
+
+### Pasar noticia 4 a borrador
+PUT {{baseUrl}}/noticias/4
+Content-Type: application/json
+
+{
+    "estado": "Borrador"
+}
+
+
+### Actualizar noticia completa
+PUT {{baseUrl}}/noticias/1
+Content-Type: application/json
+
+{
+    "titulo": "Semana universitaria",
+    "categoria": "Evento",
+    "fecha": "2026-06-10",
+    "descripcion": "Participa en las actividades deportivas, culturales y académicas.",
+    "estado": "Publicada"
+}
+
+
+### Eliminar noticia de prueba
+# Reemplaza ID_NUEVO por el ID devuelto en el POST
+DELETE {{baseUrl}}/noticias/ID_NUEVO
