@@ -1,19 +1,33 @@
-import Sequelize from 'sequelize';
-import pg from 'pg';
+import { Sequelize } from 'sequelize'
+import dotenv from 'dotenv'
 
-const hostname = process.env.DB_HOST || 'localhost';
-const username = process.env.DB_USERNAME || 'postgres';
-const password = process.env.DB_PASSWORD || '1234';
-const database = process.env.DB_NAME || 'sistema_reserva_espacios';
-const port = process.env.DB_PORT || 5432;
-const dialect = 'postgres';
+dotenv.config()
 
-const sequelize = new Sequelize(database, username, password, {
-    host: hostname,
-    port,
-    dialect,
-    dialectModule: pg,
-    logging: false
-});
+let sequelize
 
-export default sequelize;
+if (process.env.DATABASE_URL) {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
+  })
+} else {
+  sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USERNAME,
+    process.env.DB_PASSWORD,
+    {
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT || 5432),
+      dialect: 'postgres',
+      logging: false
+    }
+  )
+}
+
+export default sequelize
